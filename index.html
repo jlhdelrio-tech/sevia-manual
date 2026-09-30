@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231D4ED8'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='38' fill='white' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<title>Guía del conductor SEVIA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --ground:#F4F7FB;--surface:#FFFFFF;--ink:#0F1B2D;--muted:#475569;--line:#CBD5E1;--soft:#E2E8F0;
+  --pri:#1D4ED8;--on-pri:#FFFFFF;--pri-ink:#1E3A8A;--pri-soft:#DBEAFE;
+  --ok:#0E6B58;--ok-ink:#0A5A47;--ok-soft:#DFF3EA;--amber:#B45309;--amber-ink:#8A3B06;--amber-soft:#FDF1E4;
+  --hdr:#0B1F3A;--hdr-ink:#F4F7FB;--hdr-muted:#A8B8D0;--chat:#E3EAF3;--bot:#FFFFFF;--me:#D6E4FF;--focus:#F59E0B;--frame:#1B2433;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B1220;--surface:#111A2B;--ink:#E6ECF5;--muted:#9FB0C8;--line:#24324A;--soft:#1B273B;
+    --pri:#60A5FA;--on-pri:#0B1220;--pri-ink:#BFDBFE;--pri-soft:#172554;
+    --ok:#3FBF9A;--ok-ink:#8FE0C6;--ok-soft:#133A30;--amber:#E08A3C;--amber-ink:#F3B77F;--amber-soft:#3A2413;
+    --hdr:#070D18;--hdr-ink:#E6ECF5;--hdr-muted:#9FB0C8;--chat:#0E1626;--bot:#16223A;--me:#1E3A6B;--focus:#FBBF24;--frame:#2A3850;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B1220;--surface:#111A2B;--ink:#E6ECF5;--muted:#9FB0C8;--line:#24324A;--soft:#1B273B;
+  --pri:#60A5FA;--on-pri:#0B1220;--pri-ink:#BFDBFE;--pri-soft:#172554;
+  --ok:#3FBF9A;--ok-ink:#8FE0C6;--ok-soft:#133A30;--amber:#E08A3C;--amber-ink:#F3B77F;--amber-soft:#3A2413;
+  --hdr:#070D18;--hdr-ink:#E6ECF5;--hdr-muted:#9FB0C8;--chat:#0E1626;--bot:#16223A;--me:#1E3A6B;--focus:#FBBF24;--frame:#2A3850;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:16px;line-height:1.5}
+h1,h2,h3{font-family:Archivo,'Arial Narrow',system-ui,sans-serif;line-height:1.15;margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+img{max-width:100%;display:block}
+code{font-weight:600;background:var(--soft);padding:0 6px;border-radius:5px;font-family:inherit}
+b{font-weight:600}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--hdr);color:var(--hdr-ink);display:flex;align-items:center;gap:10px;padding:10px 14px;min-height:56px}
+.top .back{min-width:44px;min-height:44px;border:0;background:transparent;color:var(--hdr-ink);border-radius:10px;cursor:pointer;font-size:22px;display:none}
+.top.sub .back{display:inline-flex;align-items:center;justify-content:center}
+.top .marca{font-family:Archivo,sans-serif;font-weight:800;letter-spacing:.14em;font-size:15px}
+.top .tt{font-weight:600;font-size:15px;color:var(--hdr-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+main{max-width:720px;margin:0 auto;padding:18px 16px 48px}
+
+/* Inicio */
+.hero{background:var(--hdr);color:var(--hdr-ink);margin:-18px -16px 18px;padding:26px 20px 28px}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:-.01em}
+.hero p{color:var(--hdr-muted);margin:10px 0 0;max-width:34em}
+.orden{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.orden span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:var(--hdr-ink);padding:6px 10px;border-radius:8px;font-size:14px;font-weight:600}
+.orden span:last-child{background:#1D4ED8;border-color:#1D4ED8;color:#fff}
+.orden i{font-style:normal;color:var(--hdr-muted);align-self:center}
+.mods{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.mods button{width:100%;text-align:left;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;min-height:64px}
+.mods .n{font-family:Archivo,sans-serif;font-weight:800;font-size:26px;color:var(--pri);text-align:center}
+.mods .t{font-weight:600;font-size:17px;display:block}
+.mods .d{color:var(--muted);font-size:14px}
+.mods .ok{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--ok-soft);color:var(--ok-ink)}
+.ayuda{margin-top:22px;color:var(--muted);font-size:14px}
+
+/* Módulo */
+.mod h2{font-size:28px;margin-bottom:6px}
+.mod h3{font-size:19px;margin:24px 0 8px}
+.lead{font-size:17px}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin:12px 0 4px;padding-bottom:4px}
+.tabs button{flex:none;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;color:var(--pri-ink)}
+.tabs button[aria-selected="true"]{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+ol.pasos{list-style:none;padding:0;margin:8px 0;counter-reset:p}
+ol.pasos li{counter-increment:p;position:relative;padding:4px 0 8px 36px}
+ol.pasos li::before{content:counter(p);position:absolute;left:0;top:4px;width:25px;height:25px;border-radius:50%;background:var(--pri);color:var(--on-pri);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+ul{padding-left:20px}
+li{margin-bottom:4px}
+.nota{background:var(--amber-soft);color:var(--ink);border-left:4px solid var(--amber);padding:10px 14px;border-radius:0 10px 10px 0;margin:12px 0}
+.fleet{border:2px solid var(--pri);border-radius:14px;padding:12px 16px;margin:14px 0;background:var(--pri-soft)}
+.fleet h3{margin:0 0 6px;color:var(--pri-ink)}
+.fleet p{margin:4px 0}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:460px}
+th{background:var(--hdr);color:var(--hdr-ink);text-align:left;padding:8px;font-weight:600}
+td{padding:8px;border-bottom:1px solid var(--soft);vertical-align:top}
+tr.mal td{background:var(--amber-soft);color:var(--amber-ink);font-weight:600}
+tr.carga td{background:var(--pri-soft)}
+figure{margin:12px 0}
+figure img{border:1px solid var(--line);border-radius:12px;max-width:340px;width:100%}
+figcaption{font-size:13px;color:var(--muted);margin-top:4px}
+.siguiente{margin-top:28px;width:100%;min-height:52px;border-radius:12px;border:1px solid var(--pri);background:var(--pri);color:var(--on-pri);font-weight:700;cursor:pointer}
+.resumen{background:var(--bot);border:1px solid var(--line);border-radius:14px;border-top-left-radius:4px;padding:12px 14px;max-width:340px}
+.resumen p{margin:0 0 6px}
+.formula{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;background:var(--surface);border:1px solid var(--line);padding:12px 14px;border-radius:12px}
+
+/* Búsqueda y preguntas */
+.buscar{margin:0 0 16px}
+.buscar label{display:block;font-weight:600;margin-bottom:6px}
+.buscar input{width:100%;min-height:48px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
+.sinres{color:var(--muted);padding:12px 2px}
+.res-extra{display:block;color:var(--pri-ink);font-size:13px;margin-top:2px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style-position:inside}
+details[open] summary{border-bottom:1px solid var(--soft)}
+details .r{padding:10px 16px 12px}
+details .r p{margin:0 0 6px}
+details .ir{min-height:40px;border:1px solid var(--pri);background:transparent;color:var(--pri-ink);border-radius:10px;padding:0 12px;font-weight:600;cursor:pointer;margin-top:4px}
+.pdf{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;margin-top:14px;border:1px solid var(--pri);border-radius:12px;color:var(--pri-ink);font-weight:700;text-decoration:none;background:var(--surface)}
+
+/* Simulador */
+.practica{margin:18px 0 6px}
+.practica > .ph-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.practica > .ph-head b{font-size:15px}
+.reiniciar{min-height:40px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:0 12px;cursor:pointer;font-weight:600;color:var(--pri-ink)}
+.phone{max-width:380px;border:8px solid var(--frame);border-radius:30px;overflow:hidden;background:var(--chat);display:flex;flex-direction:column;height:560px}
+.ph-top{background:var(--hdr);color:var(--hdr-ink);display:flex;align-items:center;gap:10px;padding:9px 12px;flex:none}
+.ph-top .av{width:30px;height:30px;border-radius:50%;background:#1D4ED8;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Archivo,sans-serif;font-weight:700}
+.ph-top b{font-size:15px}
+.msgs{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:7px}
+.msg{max-width:86%;padding:8px 11px;border-radius:14px;font-size:15px;line-height:1.4}
+.msg.bot{align-self:flex-start;background:var(--bot);border-top-left-radius:4px}
+.msg.yo{align-self:flex-end;background:var(--me);border-top-right-radius:4px}
+.msg.yo.foto{display:flex;align-items:center;gap:8px}
+.fph{display:inline-block;width:34px;height:26px;border-radius:5px;background:#9FB0C8;position:relative;flex:none}
+.fph::after{content:"";position:absolute;left:7px;bottom:5px;border:7px solid transparent;border-bottom:9px solid #fff;border-top:0}
+.msg.fin{align-self:center;background:var(--ok-soft);color:var(--ok-ink);font-weight:600;text-align:center}
+.quick{display:flex;flex-direction:column;gap:6px}
+.quick button{min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bot);color:var(--pri-ink);font-weight:600;cursor:pointer;padding:8px 12px;text-align:center}
+.quick button small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.quick button.pista{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-soft)}
+.accion{padding:10px;background:var(--surface);border-top:1px solid var(--line);flex:none}
+.accion:empty{display:none}
+.accion .btnreal{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--pri);background:var(--pri);color:var(--on-pri);font-weight:600;cursor:pointer}
+.composer{display:flex;gap:6px;padding:10px;background:var(--surface);align-items:center;flex:none;border-top:1px solid var(--line)}
+.composer .campo{flex:1;min-width:0;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--ground);padding:0 16px;display:flex;align-items:center;color:var(--muted);font-size:15px;cursor:pointer;text-align:left}
+.composer .campo.listo{color:var(--ink);border-color:var(--pri)}
+.composer .send{width:44px;height:44px;border-radius:50%;border:0;background:var(--pri);color:var(--on-pri);cursor:pointer;flex:none;display:flex;align-items:center;justify-content:center}
+.composer .send:disabled{opacity:.45;cursor:default}
+.tip{max-width:380px;margin-top:10px;padding:10px 14px;border-radius:12px;background:var(--surface);border:1px solid var(--line);font-size:15px;min-height:48px}
+.tip.warn{background:var(--amber-soft);border-color:var(--amber);color:var(--ink)}
+.tip.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ink)}
+@media (prefers-reduced-motion: no-preference){ .msg.nuevo{animation:ent .22s ease-out} @keyframes ent{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}} }
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <button class="back" id="back" type="button" aria-label="Volver al inicio">‹</button>
+  <span class="marca">SEVIA</span><span class="tt" id="tt">Guía del conductor</span>
+</header>
+<main id="main"></main>
+<script>
+/* Pantallas de ejemplo del chat del conductor (app v10). */
+const TIPOS = ['Asistencia', 'Día extra', 'Permiso', 'Falta', 'Incapacidad', 'Descanso', 'Otros'];
+const CONF = ['Corregir datos|Vuelves a capturar desde el primer paso', 'Cancelar'];
+
+const FLUJOS = {
+  aviso: { titulo: 'Primera entrada', pasos: [
+    { b: 'Antes de empezar: SEVIA usará tu ubicación al registrar asistencia, fotos de tu licencia y de la unidad, y los datos de tus ingresos y depósitos para el control de la operación y de los pagos.\n\nConsulta el aviso de privacidad completo: [enlace del aviso de privacidad]\n\n¿Aceptas?',
+      o: ['Acepto'], r: 0, n: 'Solo aparece la primera vez. Lee el aviso y toca «Acepto».' },
+    { b: 'Gracias, Carlos. ¿Qué quieres hacer?', o: ['Registrar mi día', 'Ver mi estado'], n: 'Este es el menú principal. En lugar de «Carlos» aparece tu nombre.' }
+  ]},
+
+  asistencia: { titulo: 'Registrar asistencia', pasos: [
+    { b: 'Hola Carlos. ¿Qué quieres hacer?', o: ['Registrar mi día', 'Ver mi estado'], r: 0, n: 'Empieza siempre con «Registrar mi día».' },
+    { b: '¿Qué vas a registrar hoy?', o: TIPOS, r: 0, n: 'Si vas a trabajar, elige Asistencia o Día extra.',
+      w: { 2: 'Permiso, Falta, Incapacidad, Descanso y Otros son días sin ruta. Practícalos en «Día sin ruta».', 3: 'Día sin ruta: practícalo en «Día sin ruta».', 4: 'Día sin ruta: practícalo en «Día sin ruta».', 5: 'Día sin ruta: practícalo en «Día sin ruta».', 6: 'Día sin ruta: practícalo en «Día sin ruta».' } },
+    { b: '¿En qué Hub estás?', o: ['Hub Murano'], r: 0, n: 'Elige el Hub donde estás en este momento.' },
+    { b: 'Toma una foto del frente de tu licencia, legible y sin reflejos.', a: 'foto', f: 'Frente de la licencia', n: 'Se toma con la cámara en ese momento. No se puede elegir de la galería.' },
+    { b: 'Comparte tu ubicación actual con el botón de ubicación. Debes estar en el Hub.', a: 'ubic', n: 'Toca «Compartir mi ubicación». Si el celular pregunta, permite el acceso a la ubicación.' },
+    { b: 'Asistencia registrada a las 07:10 a.m. en Hub Murano.\nEstás a 54 m del Hub, dentro del radio.', n: 'Tu asistencia ya quedó guardada. Si estás fuera del radio, también se guarda y tu responsable lo revisa.' },
+    { b: '¿Algo más?', o: ['Iniciar ruta', 'Cerrar jornada sin ruta', 'Ver mi estado'], n: 'Ahora puedes iniciar tu ruta.' }
+  ]},
+
+  inicio: { titulo: 'Iniciar ruta', pasos: [
+    { b: '¿Algo más?', o: ['Iniciar ruta', 'Cerrar jornada sin ruta', 'Ver mi estado'], r: 0, n: 'Toca «Iniciar ruta» cuando ya tengas la unidad.',
+      w: { 1: 'Úsalo solo si al final no vas a salir a ruta. Lo ves en «Asistencia sin ruta».' } },
+    { b: 'Tu unidad asignada hoy es EV-07 (placa EJEMPLO). ¿Estás con esa unidad?', o: ['Sí, es esa unidad', 'No, tengo otra'], r: 0,
+      n: 'Revisa que sea la unidad que tienes enfrente.', w: { 1: 'Solo puedes salir con la unidad asignada. Pide a tu responsable que cambie la asignación.' } },
+    { b: 'Toma una foto del tablero donde se vean el km y la batería.', a: 'foto', f: 'Tablero: km y batería', n: 'Que se lean bien los números.' },
+    { b: 'Escribe el km inicial, solo números.', r: '1569', n: 'Solo números, sin puntos ni comas.' },
+    { b: '¿Con qué porcentaje de batería inicias? (de 0 a 100)', r: '100', n: 'Un número de 0 a 100.' },
+    { b: 'Equipamiento 1 de 5: Cable de carga', o: ['Completo', 'Falta', 'Dañado'], r: 0, n: 'La app pregunta cada artículo del equipamiento, uno por uno. La lista la define SEVIA.' },
+    { b: '¿Cómo recibiste la unidad?', o: ['Limpia', 'Sucia'], r: 0, n: 'Si eliges Sucia, la app te pide una foto.' },
+    { b: '¿Encontraste daños nuevos en la unidad?', o: ['No', 'Sí, reportar daño'], r: 0, n: 'Reporta cualquier daño que no esté registrado.', w: { 1: 'Elegirías la zona, describirías el daño y tomarías la foto. Puedes reportar varios.' } },
+    { b: 'Revisa tu registro:\n• Unidad: EV-07\n• Km: 1569\n• Batería: 100 %\n• Equipamiento: completo\n• Limpieza: Limpia\n• Daños nuevos: ninguno',
+      o: ['Confirmar e iniciar ruta'].concat(CONF), r: 0, n: 'Revisa el resumen antes de confirmar.',
+      w: { 1: 'Vuelves a capturar el inicio de ruta desde el primer paso.', 2: 'No se guarda nada.' } },
+    { b: 'Ruta iniciada con EV-07. Buen viaje.\nTu responsable validará los datos del inicio. Al regresar, abre la app y elige Finalizar ruta.', n: 'Listo, ya estás en ruta.' }
+  ]},
+
+  dano: { titulo: 'Reportar un daño', pasos: [
+    { b: '¿Encontraste daños nuevos en la unidad?', o: ['No', 'Sí, reportar daño'], r: 1, n: 'Toca «Sí, reportar daño».' },
+    { b: 'Daño 1: ¿en qué zona del vehículo está?', o: ['Defensa delantera', 'Defensa trasera', 'Costado izquierdo', 'Costado derecho', 'Techo o cofre', 'Llantas o rines', 'Interior', 'Otra'], r: 3, n: 'Elige la zona del daño.' },
+    { b: 'Describe brevemente el daño (qué es y dónde exactamente).', r: 'Rayón en puerta trasera derecha', n: 'Qué es y dónde está exactamente.' },
+    { b: 'Toma una foto del daño.', a: 'foto', f: 'Foto del daño', n: 'Toma la foto de cerca y con buena luz.' },
+    { b: 'Llevas 1 daño reportado. ¿Hay otro daño?', o: ['Sí, agregar otro daño', 'No, continuar'], r: 1, n: 'Si hay más daños, repite los pasos.' }
+  ]},
+
+  fin: { titulo: 'Finalizar ruta', pasos: [
+    { b: 'Hola Carlos. ¿Qué quieres hacer?', o: ['Finalizar ruta', 'Ver mi estado'], r: 0, n: 'Al regresar al Hub, toca «Finalizar ruta».' },
+    { b: 'Vas a cerrar la ruta de EV-07.\n\nToma una foto del tablero final.', a: 'foto', f: 'Tablero final', n: 'En unidades Traveler, la app además pide la foto del tablero resumen y los consumos.' },
+    { b: 'Escribe el km final. (El km inicial fue 1569)', r: '1950', n: 'No puede ser menor que el km inicial.' },
+    { b: 'Según tus datos recorriste 381 km en esta ruta (inicial 1569, final 1950). Es más de 300 km.\n\nRevisa el tablero. ¿El km final es correcto?', o: ['Sí, es correcto', 'No, corregir km final'], r: 0,
+      n: 'Solo aparece si recorriste más de 300 km. Revisa el tablero antes de responder.', w: { 1: 'La app te vuelve a pedir el km final.' } },
+    { b: '¿Con qué porcentaje de batería regresas? (de 0 a 100)', r: '35', n: 'Un número de 0 a 100.' },
+    { b: 'Equipamiento 1 de 5: Cable de carga', o: ['Completo', 'Falta', 'Dañado'], r: 0, n: 'Revisa otra vez cada artículo.' },
+    { b: '¿Hubo daños nuevos durante la ruta?', o: ['No', 'Sí, reportar daño'], r: 0, n: 'Reporta cualquier daño que haya ocurrido en la ruta.' },
+    { b: 'Revisa tu registro:\n• Km: 1950\n• Batería: 35 %\n• Equipamiento: completo\n• Daños nuevos: ninguno', o: ['Confirmar y finalizar ruta'].concat(CONF), r: 0, n: 'Revisa el resumen antes de confirmar.' },
+    { b: 'Ruta finalizada. Recorriste 381 km.\nTu responsable validará el cierre.', n: 'La app pasa directo al corte financiero.' },
+    { b: 'Ahora registra tu corte financiero de hoy.\nEnvía una captura de la app DiDi con los ingresos del día.', a: 'fotoG', f: 'Captura Fleet', n: 'Aquí sube tu captura de Fleet. Sigue en «Corte financiero».' }
+  ]},
+
+  sinruta: { titulo: 'Día sin ruta', pasos: [
+    { b: 'Hola Carlos. ¿Qué quieres hacer?', o: ['Registrar mi día', 'Ver mi estado'], r: 0, n: 'Empieza con «Registrar mi día».' },
+    { b: '¿Qué vas a registrar hoy?', o: TIPOS, r: 5, n: 'Elige el tipo de día: Descanso, Falta, Permiso, Incapacidad u Otros.',
+      w: { 0: 'Asistencia y Día extra son días con ruta. Practícalos en «Día con ruta».', 1: 'Día con ruta: practícalo en «Día con ruta».' } },
+    { b: 'Si quieres, agrega un comentario.', o: ['Sin comentario'], r: 0, n: 'Es opcional. En «Otros» es obligatorio. En Incapacidad no escribas diagnósticos.' },
+    { b: 'Vas a registrar Descanso para hoy. ¿Confirmas?', o: ['Confirmar'].concat(CONF), r: 0, n: 'Revisa que el tipo sea correcto.' },
+    { b: 'Registré Descanso para hoy a las 09:05 a.m. Tu responsable lo verá en su panel.', n: 'Tu día quedó registrado. Ahora sigue el corte.' },
+    { b: 'Registra tu corte financiero de hoy.\n¿Tuviste ingresos ese día?', o: ['Sí', 'No'], r: 0, n: 'Si tuviste ganancias garantizadas u otro ingreso, toca «Sí».',
+      w: { 1: 'Confirmarías tu corte sin ingresos y tu jornada quedaría cerrada.' } },
+    { b: 'Envía una captura de la app DiDi con los ingresos del día.', a: 'fotoG', f: 'Captura Fleet', n: 'Sube tu captura de Fleet. Puedes elegirla de la galería.' },
+    { b: '¿Cuánto fue el ingreso en efectivo según la app? (solo el monto)', r: '0', n: 'Lo que Fleet marque como efectivo. Si no hay, escribe 0.' },
+    { b: '¿Cuánto fue el ingreso con tarjeta según la app?', r: '800', n: 'Lo que Fleet marque como pago digital o tarjeta, por ejemplo tu ganancia garantizada.' },
+    { b: 'Total de ingresos: $800.00 (efectivo $0.00 + tarjeta $800.00).\n\n¿Hubo propinas?', o: ['Sí', 'No'], r: 1, n: 'Si hubo, captura el monto y sube la evidencia.' },
+    { b: '¿Hubo algún pago de usuario no realizado?', o: ['Sí', 'No'], r: 1, n: 'Si hubo, captura el monto y sube el reporte en DiDi.' },
+    { b: 'Ahora tu depósito. Según la app, el efectivo a entregar es $0.00.\n¿Cuánto depositaste o entregaste en total?', r: '0', n: 'No había efectivo que entregar: escribe 0. La app ya no pide comprobante.' },
+    { b: 'Revisa tu corte:\n• Efectivo (app): $0.00\n• Tarjeta (app): $800.00\n• Total de ingresos: $800.00\n• Propinas: no\n• Pago no realizado: no\n• Entregado: $0.00\n\nResultado: Pago completo.',
+      o: ['Confirmar y cerrar jornada'].concat(CONF), r: 0, n: 'Revisa los montos antes de confirmar.' },
+    { b: 'Corte registrado. Pago completo.\n\nTu jornada de hoy quedó cerrada.', n: 'Listo, tu día quedó cerrado.' }
+  ]},
+
+  sinIngresos: { titulo: 'Corte sin ingresos', pasos: [
+    { b: 'Registra tu corte financiero de hoy.\n¿Tuviste ingresos ese día?', o: ['Sí', 'No'], r: 1, n: 'Si no tuviste ningún ingreso, toca «No».' },
+    { b: 'Vas a registrar tu corte sin ingresos. ¿Confirmas?', o: ['Confirmar y cerrar jornada'].concat(CONF), r: 0, n: 'Confirma para cerrar tu día.' },
+    { b: 'Corte registrado. Sin ingresos.\n\nTu jornada de hoy quedó cerrada.', n: 'Listo.' }
+  ]},
+
+  pendiente: { titulo: 'Corte pendiente', pasos: [
+    { b: 'Hola Carlos. ¿Qué quieres hacer?\n\nTienes pendiente el corte financiero de hoy. Regístralo para cerrar tu jornada; sin él no puedes abrir un nuevo día.', o: ['Registrar corte financiero', 'Ver mi estado'], r: 0, n: 'Si cancelaste o no terminaste tu corte, aparece este botón.' }
+  ]},
+
+  cerrarSinRuta: { titulo: 'Asistencia sin ruta', pasos: [
+    { b: '¿Algo más?', o: ['Iniciar ruta', 'Cerrar jornada sin ruta', 'Ver mi estado'], r: 1, n: 'Registraste asistencia pero no saliste: toca «Cerrar jornada sin ruta».',
+      w: { 0: 'Si sí vas a salir, inicia tu ruta normalmente.' } },
+    { b: 'Registra tu corte financiero de hoy.\n¿Tuviste ingresos ese día?', o: ['Sí', 'No'], r: 1, n: 'Sigue igual que el corte de un día sin ruta.' },
+    { b: 'Vas a registrar tu corte sin ingresos. ¿Confirmas?', o: ['Confirmar y cerrar jornada'].concat(CONF), r: 0, n: 'Confirma para cerrar tu jornada.' },
+    { b: 'Corte registrado. Sin ingresos.\n\nTu jornada de hoy quedó cerrada.', n: 'Listo.' }
+  ]},
+
+  olvido: { titulo: 'Jornada del día anterior', pasos: [
+    { b: 'Hola Carlos. ¿Qué quieres hacer?\n\nTu jornada de ayer quedó abierta sin ruta. Ciérrala con tu corte financiero para poder registrar un nuevo día.', o: ['Cerrar jornada sin ruta', 'Ver mi estado'], r: 0, n: 'Primero cierra la jornada de ayer.' }
+  ]},
+
+  corte: { titulo: 'Corte financiero', pasos: [
+    { b: 'Ahora registra tu corte financiero de hoy.\nEnvía una captura de la app DiDi con los ingresos del día.', a: 'fotoG', f: 'Captura Fleet', n: 'Sube tu captura de Fleet completa y legible.' },
+    { b: '¿Cuánto fue el ingreso en efectivo según la app? (solo el monto)', r: '650', n: 'Lo que Fleet marque como efectivo. Este monto lo debes entregar.' },
+    { b: '¿Cuánto fue el ingreso con tarjeta según la app?', r: '1800', n: 'Lo que Fleet marque como pago digital o tarjeta. No se entrega.' },
+    { b: 'Total de ingresos: $2,450.00 (efectivo $650.00 + tarjeta $1,800.00).\n\n¿Hubo propinas?', o: ['Sí', 'No'], r: 1, n: 'Si hubo, captura el monto y sube la evidencia.', w: { 0: 'Escribirías cuánto sumaron y subirías la evidencia.' } },
+    { b: '¿Hubo algún pago de usuario no realizado?', o: ['Sí', 'No'], r: 1, n: 'Si un usuario no pagó, repórtalo.', w: { 0: 'Escribirías el monto y subirías la captura del reporte en DiDi.' } },
+    { b: 'Ahora tu depósito. Según la app, el efectivo a entregar es $650.00.\n¿Cuánto depositaste o entregaste en total?', r: '650', n: 'Escribe lo que realmente entregaste.' },
+    { b: '¿Cómo lo entregaste?', o: ['Efectivo', 'Transferencia', 'Terminal', 'Combinado'], r: 0, n: 'Elige el método de entrega.' },
+    { b: 'Envía el comprobante del depósito. Esta foto es obligatoria.', a: 'fotoG', f: 'Comprobante de depósito', n: 'Sin comprobante no se puede continuar.' },
+    { b: '¿Quieres agregar otra evidencia? (máximo 3)', o: ['Sí', 'No'], r: 1, n: 'Opcional: hasta 3 evidencias en total.' },
+    { b: 'Revisa tu corte:\n• Efectivo (app): $650.00\n• Tarjeta (app): $1,800.00\n• Total de ingresos: $2,450.00\n• Propinas: no\n• Pago no realizado: no\n• Entregado: $650.00 (Efectivo)\n\nResultado: Pago completo.',
+      o: ['Confirmar y cerrar jornada'].concat(CONF), r: 0, n: 'Revisa los montos antes de confirmar.', w: { 1: 'Vuelves a capturar el corte desde el primer paso.', 2: 'El corte queda pendiente.' } },
+    { b: 'Corte registrado. Pago completo.\n\nTu jornada de hoy quedó cerrada.', n: 'Listo.' },
+    { b: '¿Algo más?\n\nTu jornada de hoy ya está cerrada. Gracias.', o: ['Ver mi estado'], n: 'Ese día ya solo puedes ver tu estado.' }
+  ]}
+};
+
+/* Dibuja un tramo de un flujo como chat estático (para el PDF).
+   Los pasos anteriores muestran la respuesta del driver; el último muestra sus botones. */
+function chatEstatico(flujo, desde, hasta) {
+  const todos = FLUJOS[flujo].pasos;
+  const p = todos.slice(desde, hasta === undefined ? todos.length : hasta + 1);
+  let h = '';
+  p.forEach((s, i) => {
+    h += '<div class="msg bot">' + esc(s.b) + '</div>';
+    if (i < p.length - 1) h += respuesta(s);
+    else if (s.o) h += botones(s.o, -1);
+    else if (s.a) h += '<div class="accionbar"><span class="btnreal">' + textoAccion(s.a) + '</span></div>';
+  });
+  return h;
+}
+function respuesta(s) {
+  if (s.a) return respuestaAccion(s);
+  if (s.o && typeof s.r === 'number') return '<div class="msg yo">' + esc(s.o[s.r].split('|')[0]) + '</div>';
+  if (typeof s.r === 'string') return '<div class="msg yo">' + esc(s.r) + '</div>';
+  return '';
+}
+function textoAccion(a) { return a === 'foto' ? 'Tomar foto' : a === 'fotoG' ? 'Elegir imagen o tomar foto' : 'Compartir mi ubicación'; }
+function respuestaAccion(s) {
+  if (s.a === 'ubic') return '<div class="msg yo">Ubicación compartida (precisión ±12 m)</div>';
+  return '<div class="msg yo foto"><span class="fph" aria-hidden="true"></span>' + esc(s.f || 'Foto') + '</div>';
+}
+function botones(o, sel) {
+  return '<div class="quick">' + o.map((t, k) => {
+    const [a, b] = t.split('|');
+    return '<span class="qb' + (k === sel ? ' sel' : '') + '">' + esc(a) + (b ? '<small>' + esc(b) + '</small>' : '') + '</span>';
+  }).join('') + '</div>';
+}
+function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>'); }
+
+const IMG = { c1: 'img/c1.webp', c2: 'img/c2.webp', c6: 'img/c6.webp' };
+const PDF_URL = 'manual-conductor-v1.0.pdf';
+
+function sim(flujo, titulo) { return '<div class="practica" data-sim="' + flujo + '"><div class="ph-head"><b>' + (titulo || 'Practica aquí') + '</b><button class="reiniciar" type="button">Empezar de nuevo</button></div></div>'; }
+const FLEET = '<div class="fleet"><h3>Regla de la captura Fleet</h3><p>Lo que Fleet marque como <b>efectivo</b> va en <b>Efectivo</b> y <b>lo debes entregar</b>.</p><p>Lo que Fleet marque como <b>pago digital o tarjeta</b> va en <b>Tarjeta</b>. No se entrega.</p><p>Si no hay uno de los dos, escribe <code>0</code>.</p></div>';
+
+const MODS = [
+ { id: 'entrar', t: 'Entrar a la app', d: 'Alta, SMS, código QR y aviso de privacidad', html: () => `
+  <p class="lead">Antes de usar la app necesitas tu alta en SEVIA.</p>
+  <h3>Antes de empezar</h3>
+  <ol class="pasos"><li>Acude con el <b>responsable de tu Hub</b> para que te dé de alta con tu número de celular propio.</li><li>Tu responsable te <b>enviará el enlace de la app</b>. Ábrelo en tu celular.</li></ol>
+  <h3>Qué necesitas</h3>
+  <ul><li>Un celular con internet. Puede ser Android o cualquier celular con navegador.</li><li>Tu licencia de conducir.</li><li>La ubicación (GPS) activada y la cámara funcionando.</li></ul>
+  <h3>Entrar con SMS</h3>
+  <ol class="pasos"><li>Escribe tu número de <b>10 dígitos</b> y toca <b>«Enviar código»</b>.</li><li>Escribe el <b>código de 6 dígitos</b> del SMS y toca <b>«Entrar»</b>.</li><li>Si te equivocaste de número, toca <b>«Usar otro número»</b>.</li></ol>
+  <figure><img src="${IMG.c1}" alt="Pantalla para escribir el número de celular" loading="lazy"><figcaption>Escribe tu número.</figcaption></figure>
+  <figure><img src="${IMG.c2}" alt="Pantalla para escribir el código SMS" loading="lazy"><figcaption>Escribe el código que te llegó.</figcaption></figure>
+  <h3>Si no te llega el SMS</h3>
+  <ol class="pasos"><li>Pide a tu responsable, en persona, que genere tu <b>código QR</b>.</li><li>Escanéalo con la cámara de tu celular y abre el enlace. La app se activa sola.</li></ol>
+  <figure><img src="${IMG.c6}" alt="Pantalla del responsable con el código QR" loading="lazy"><figcaption>Así se ve en la pantalla de tu responsable. Aquí está difuminado a propósito.</figcaption></figure>
+  <p class="nota">El QR <b>solo sirve una vez</b> y <b>vence en 10 minutos</b>.</p>
+  <h3>Aviso de privacidad (solo la primera vez)</h3>
+  <p>La app te explica qué datos usa SEVIA. Léelo y toca <b>«Acepto»</b>.</p>
+  ${sim('aviso')}
+  <h3>Instalar, actualizar y salir</h3>
+  <ul><li><b>Instalar (Android):</b> toca «Instalar la app en este celular» o «Instalar» arriba en el chat. Aparece el ícono azul de SEVIA.</li>
+  <li><b>«Hay una versión nueva de SEVIA»:</b> toca «Actualizar» cuando no estés a mitad de un registro.</li>
+  <li><b>Salir:</b> toca «Salir» y luego «Toca otra vez para salir». Si cambias o pierdes tu celular, avisa a tu responsable.</li></ul>` },
+
+ { id: 'chat', t: 'Cómo usar el chat', d: 'Botones, números, fotos y ubicación', html: () => `
+  <p class="lead">La app te hace <b>una pregunta a la vez</b>. Tú respondes con botones, números o fotos.</p>
+  <ul><li><b>Botones:</b> toca la opción. No necesitas escribirla.</li>
+  <li><b>Números:</b> solo números, sin puntos ni comas. Ejemplo de km: <code>45210</code>.</li>
+  <li><b>Montos:</b> con punto para centavos. Ejemplo: <code>1250.50</code>.</li>
+  <li><b>«Tomar foto»</b> abre la cámara (licencia, tablero, daños). <b>«Elegir imagen o tomar foto»</b> te deja usar la galería (capturas y comprobantes).</li>
+  <li><b>Ubicación:</b> toca «Compartir mi ubicación».</li>
+  <li>Escribe <code>menu</code> para volver al inicio o <code>cancelar</code> para abandonar un registro.</li>
+  <li>Antes de guardar verás un resumen: <b>Confirmar</b>, <b>Corregir datos</b> (vuelves a empezar esa etapa) o <b>Cancelar</b> (no se guarda nada).</li>
+  <li>Si dejas un registro a medias <b>más de 12 horas</b>, empiezas esa etapa de nuevo.</li></ul>
+  <p class="nota">En las prácticas de esta guía, toca los botones azules, el campo de texto o el botón de foto para avanzar. No se envía nada a SEVIA.</p>` },
+
+ { id: 'ruta', t: 'Día con ruta', d: 'Asistencia, iniciar ruta, daños y finalizar', tabs: [
+   { t: 'Asistencia', html: () => `<ol class="pasos"><li>Toca <b>«Registrar mi día»</b> y elige <b>Asistencia</b> o <b>Día extra</b>.</li><li>Elige tu Hub.</li><li>Foto del frente de tu <b>licencia</b>.</li><li>Toca <b>«Compartir mi ubicación»</b>. Debes estar en el Hub.</li></ol>
+     <p>Se guarda en cuanto envías tu ubicación. Si estás fuera del radio, también se guarda y tu responsable lo revisa. Si la precisión del GPS fue baja, activa la <i>ubicación precisa</i>.</p>${sim('asistencia')}` },
+   { t: 'Iniciar ruta', html: () => `<p class="nota">Tu responsable debe <b>asignarte una unidad</b> ese día. Solo puedes salir con la unidad asignada.</p>
+     <ol class="pasos"><li>Confirma tu unidad.</li><li>Foto del tablero, km inicial y % de batería.</li><li>Equipamiento, limpieza y daños nuevos.</li><li>Revisa el resumen y toca <b>«Confirmar e iniciar ruta»</b>.</li></ol>${sim('inicio')}` },
+   { t: 'Reportar daño', html: () => `<ol class="pasos"><li>Toca <b>«Sí, reportar daño»</b>.</li><li>Elige la zona, describe el daño y toma la foto.</li><li>Repite si hay más daños.</li></ol>${sim('dano')}` },
+   { t: 'Finalizar ruta', html: () => `<ol class="pasos"><li>Al regresar toca <b>«Finalizar ruta»</b>.</li><li>Foto del tablero final. En unidades <b>Traveler</b> también el tablero resumen y los consumos.</li><li>Km final (no menor al inicial). Si pasas de <b>300 km</b>, revisa el tablero y confirma.</li><li>Batería, equipamiento y daños.</li><li>Confirma. La app pasa directo al <b>corte financiero</b>.</li></ol>${sim('fin')}
+     <h3>Reglas</h3><ul><li>Un solo registro y un solo inicio de ruta por día.</li><li>Si la unidad sigue en ruta con otro conductor, espera o avisa a tu responsable.</li><li>No puedes registrar un día nuevo sin tu corte financiero.</li></ul>` }
+ ]},
+
+ { id: 'sinruta', t: 'Día sin ruta', d: 'Descanso, Falta, Permiso, Incapacidad, Otros y ganancias garantizadas', html: () => `
+  <p class="lead">Cuando <b>no sales a ruta</b> no necesitas licencia ni ubicación, pero <b>sí haces tu corte financiero</b>, aunque no tengas ingresos.</p>
+  <ol class="pasos"><li>Toca <b>«Registrar mi día»</b> y elige el tipo.</li><li>Comentario: opcional (toca «Sin comentario»). En <b>Otros</b> es obligatorio. En Incapacidad no escribas diagnósticos.</li><li>Confirma. La app pasa al corte.</li><li>Si tuviste ingresos, como <b>ganancias garantizadas</b>, toca «Sí» y <b>sube tu captura de Fleet</b> cuando la app pida la captura de DiDi.</li></ol>
+  ${FLEET}
+  ${sim('sinruta', 'Practica: Descanso con ganancia garantizada')}
+  ${sim('sinIngresos', 'Practica: sin ingresos')}
+  <h3>Ejemplos</h3>
+  <div class="scroll"><table><thead><tr><th>Caso</th><th>Efectivo</th><th>Tarjeta</th><th>Entregas</th><th>Resultado</th></tr></thead><tbody>
+  <tr><td>Descanso sin ingresos</td><td>—</td><td>—</td><td>—</td><td>Corte sin ingresos</td></tr>
+  <tr><td>Garantizada digital de $800</td><td>0</td><td>800</td><td>0</td><td>Pago completo</td></tr>
+  <tr><td>Fleet: $650 efectivo y $1,800 digital</td><td>650</td><td>1,800</td><td>650</td><td>Pago completo</td></tr>
+  <tr class="mal"><td>Igual, pero no entregas</td><td>650</td><td>1,800</td><td>0</td><td>Te faltan $650</td></tr></tbody></table></div>
+  <h3>Si cancelas el corte</h3>
+  <p>Queda pendiente y en el menú aparece <b>«Registrar corte financiero»</b>. No puedes registrar un día nuevo hasta hacerlo.</p>
+  ${sim('pendiente', 'Así se ve el menú')}` },
+
+ { id: 'sinsalir', t: 'Asistencia sin salir a ruta', d: 'Cerrar jornada sin ruta', html: () => `
+  <p class="lead">Registraste Asistencia o Día extra, pero <b>no saliste a ruta</b>.</p>
+  <ol class="pasos"><li>En el menú toca <b>«Cerrar jornada sin ruta»</b>.</li><li>Haz tu corte como en un día sin ruta.</li></ol>
+  ${sim('cerrarSinRuta')}
+  <h3>Si se te olvidó cerrarla</h3>
+  <p>Al día siguiente solo verás «Cerrar jornada sin ruta» hasta que la cierres.</p>
+  ${sim('olvido', 'Así se ve al día siguiente')}
+  <p class="nota">Si ya iniciaste ruta, no uses esta opción: <b>finaliza la ruta</b>.</p>` },
+
+ { id: 'corte', t: 'Corte financiero', d: 'Qué te pide, qué cargar y el resumen', html: () => `
+  <p class="lead">El corte es <b>obligatorio todos los días</b>. Sin corte no puedes registrar un día nuevo.</p>
+  <h3>Ten a la mano</h3>
+  <ul><li>Captura de <b>Fleet</b> con los ingresos del día.</li><li><b>Comprobante</b> de depósito (si entregaste dinero).</li><li>Evidencia de <b>propinas</b> (si hubo).</li><li>Captura del <b>reporte en DiDi</b> del pago no realizado (si hubo).</li></ul>
+  <h3>Orden en que la app te pide la información</h3>
+  <div class="scroll"><table><thead><tr><th>#</th><th>La app te pide</th><th>Tú respondes o cargas</th></tr></thead><tbody>
+  <tr><td>1</td><td>«¿Tuviste ingresos ese día?» (solo días sin ruta)</td><td>Sí o No</td></tr>
+  <tr class="carga"><td>2</td><td>Captura de la app DiDi</td><td><b>Carga tu captura de Fleet</b></td></tr>
+  <tr><td>3</td><td>Ingreso en efectivo</td><td>Lo que Fleet marca como efectivo</td></tr>
+  <tr><td>4</td><td>Ingreso con tarjeta</td><td>Lo que Fleet marca como digital o tarjeta</td></tr>
+  <tr><td>5</td><td>¿Hubo propinas?</td><td>Si sí: monto y <b>carga la evidencia</b></td></tr>
+  <tr><td>6</td><td>¿Pago de usuario no realizado?</td><td>Si sí: monto y <b>carga el reporte en DiDi</b></td></tr>
+  <tr><td>7</td><td>¿Cuánto entregaste en total?</td><td>Lo que entregaste, o 0</td></tr>
+  <tr><td>8</td><td>¿Cómo lo entregaste?</td><td>Efectivo, Transferencia, Terminal o Combinado</td></tr>
+  <tr class="carga"><td>9</td><td>Comprobante del depósito</td><td><b>Carga el comprobante</b> (obligatorio)</td></tr>
+  <tr><td>10</td><td>¿Otra evidencia?</td><td>Opcional, hasta 3 en total</td></tr>
+  <tr><td>11</td><td>Revisa tu corte</td><td>«Confirmar y cerrar jornada»</td></tr></tbody></table></div>
+  ${FLEET}
+  ${sim('corte', 'Practica tu corte')}
+  <h3>El resumen</h3>
+  <div class="resumen"><p><b>Revisa tu corte:</b></p><p>• Efectivo (app): $650.00<br>• Tarjeta (app): $1,800.00<br>• Total de ingresos: $2,450.00<br>• Propinas: no<br>• Pago no realizado: no<br>• Entregado: $650.00 (Efectivo)</p><p><b>Resultado: Pago completo.</b></p></div>
+  <h3>Cómo se calcula</h3>
+  <p class="formula">Resultado = lo que entregaste − el efectivo según la app</p>
+  <ul><li>Exacto: «Pago completo».</li><li>De más: «Pago completo (entregaste $… de más)».</li><li>De menos: «Te faltan $… por entregar». Pasa a <b>Pendientes de cobro</b>.</li>
+  <li>La tarjeta no se entrega. Propinas y pagos no realizados <b>no cambian</b> el efectivo a entregar.</li>
+  <li>Tu responsable valida tu corte. <b>Lo que tú capturaste siempre se conserva</b>; si corrige algo, recibes un aviso.</li></ul>` },
+ { id: 'preguntas', t: 'Preguntas frecuentes', d: 'Respuestas rápidas a las dudas más comunes', html: () => `
+  <p class="lead">Toca una pregunta para ver la respuesta.</p>
+  ${FAQ.map(q => `<details><summary>${q.p}</summary><div class="r">${q.r}${q.ir ? `<button class="ir" type="button" data-ir="${q.ir}">Ver el tema completo</button>` : ''}</div></details>`).join('')}` }
+];
+const FAQ = [
+ { p: 'No me llega el SMS, ¿qué hago?', r: '<p>Pide a tu responsable de Hub, en persona, que genere tu <b>código QR</b> y escanéalo con la cámara. Solo sirve una vez y vence en 10 minutos.</p>', ir: 'entrar' },
+ { p: '¿Puedo usar un celular que no sea Android?', r: '<p>Sí. Usa la app desde el navegador de tu celular con el enlace que te envió tu responsable. En Android además puedes instalarla.</p>', ir: 'entrar' },
+ { p: 'La app dice que estoy fuera del radio del Hub', r: '<p>Tu asistencia <b>sí se guarda</b>, pero tu responsable la revisará. Registra tu asistencia estando en el Hub.</p>', ir: 'ruta/0' },
+ { p: 'Mi GPS tiene precisión baja', r: '<p>Activa la <b>ubicación precisa</b> en los ajustes de tu celular para la próxima vez.</p>', ir: 'ruta/0' },
+ { p: 'Me aparece «Aún no tienes unidad asignada para hoy»', r: '<p>Pide a tu responsable que te asigne una unidad. Sin asignación no puedes iniciar ruta.</p>', ir: 'ruta/1' },
+ { p: 'Tengo otra unidad, no la que dice la app', r: '<p>Toca «No, tengo otra» y pide a tu responsable que cambie la asignación. <b>Solo puedes salir con la unidad asignada.</b></p>', ir: 'ruta/1' },
+ { p: 'Recorrí más de 300 km y la app me pregunta si es correcto', r: '<p>Revisa el tablero. Si el km está bien, toca «Sí, es correcto». Si no, toca «No, corregir km final» y escríbelo de nuevo.</p>', ir: 'ruta/3' },
+ { p: 'No salí a ruta pero tengo ganancias garantizadas, ¿cómo las registro?', r: '<p>Registra tu tipo de día (por ejemplo Descanso) y en el corte responde <b>«Sí»</b> a «¿Tuviste ingresos ese día?». Cuando la app pida la captura de DiDi, <b>sube tu captura de Fleet</b>.</p><p>Lo que Fleet marque como efectivo va en <b>Efectivo</b> y lo entregas; lo que marque como digital o tarjeta va en <b>Tarjeta</b>.</p>', ir: 'sinruta' },
+ { p: 'La app pide captura de DiDi, ¿cuál subo?', r: '<p>Sube tu <b>captura de Fleet</b> con los ingresos del día.</p>', ir: 'corte' },
+ { p: 'No tuve ningún ingreso, ¿también hago corte?', r: '<p>Sí. Responde «No» a «¿Tuviste ingresos ese día?» y confirma. Tu jornada queda cerrada.</p>', ir: 'sinruta' },
+ { p: 'Registré asistencia pero no salí a ruta', r: '<p>Toca <b>«Cerrar jornada sin ruta»</b> y haz tu corte.</p>', ir: 'sinsalir' },
+ { p: '¿Qué pasa si entrego menos efectivo del que marca la app?', r: '<p>La app dice «Te faltan $… por entregar». Queda en <b>Pendientes de cobro</b> y tu responsable da seguimiento.</p>', ir: 'corte' },
+ { p: '¿Las propinas cambian lo que debo entregar?', r: '<p>No. Propinas y pagos no realizados se registran como información y <b>no cambian</b> el efectivo a entregar.</p>', ir: 'corte' },
+ { p: 'Cancelé mi corte, ¿qué hago?', r: '<p>Queda pendiente. En el menú toca <b>«Registrar corte financiero»</b>. Sin corte no puedes registrar un día nuevo.</p>', ir: 'sinruta' },
+ { p: 'Me equivoqué en un dato antes de confirmar', r: '<p>En el resumen toca <b>«Corregir datos»</b>: vuelves a capturar esa etapa desde el primer paso.</p>', ir: 'chat' },
+ { p: 'Apareció «Hay una versión nueva de SEVIA»', r: '<p>Toca «Actualizar» cuando no estés a mitad de un registro.</p>', ir: 'entrar' },
+ { p: 'Cambié o perdí mi celular', r: '<p>Avisa a tu responsable de Hub para que cierre tu sesión y actualice tu número.</p>', ir: 'entrar' }
+];
+
+/* ---------- Progreso (solo en este celular) ---------- */
+let hechos = {};
+try { hechos = JSON.parse(localStorage.getItem('sevia-guia-hechos') || '{}') || {}; } catch (e) { hechos = {}; }
+function marcar(f) { hechos[f] = 1; try { localStorage.setItem('sevia-guia-hechos', JSON.stringify(hechos)); } catch (e) {} }
+
+/* ---------- Vistas ---------- */
+const $ = s => document.querySelector(s);
+function inicio() {
+  $('#top').classList.remove('sub'); $('#tt').textContent = 'Guía del conductor';
+  $('#main').innerHTML = `<section class="hero"><h1>Guía del conductor</h1><p>Aprende a registrar tu día en la app SEVIA Conductores y practica cada paso sin riesgo.</p>
+    <div class="orden" aria-label="Orden de tu día"><span>Registrar mi día</span><i>›</i><span>Iniciar ruta</span><i>›</i><span>Finalizar ruta</span><i>›</i><span>Corte financiero</span></div></section>
+    <div class="buscar"><label for="q">Busca un tema</label><input id="q" type="search" placeholder="Ejemplo: ganancia garantizada, QR, faltante" autocomplete="off"></div>
+    <ul class="mods" id="mods">${MODS.map((m, i) => `<li><button type="button" data-m="${m.id}"><span class="n">${i + 1}</span><span><span class="t">${m.t}</span><span class="d">${m.d}</span></span>${practicado(m) ? '<span class="ok">Practicado</span>' : ''}</button></li>`).join('')}</ul>
+    <p class="sinres" id="sinres" hidden>No encontré ese tema. Prueba con otra palabra o revisa «Preguntas frecuentes».</p>
+    ${PDF_URL ? `<a class="pdf" href="${PDF_URL}" download>Descargar el manual en PDF</a>` : ''}
+    <p class="ayuda">¿Dudas? Acude con el responsable de tu Hub. Guía versión 1.0 para la app versión 10.</p>`;
+  document.querySelectorAll('.mods button').forEach(b => b.addEventListener('click', () => { location.hash = b.dataset.m; }));
+  $('#q').addEventListener('input', e => buscar(e.target.value));
+  window.scrollTo(0, 0);
+}
+/* Búsqueda sin acentos sobre el texto de cada tema */
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const plano = h => h.replace(/<[^>]+>/g, ' ');
+function textoMod(m) { return norm(m.t + ' ' + m.d + ' ' + plano(m.tabs ? m.tabs.map(t => t.t + ' ' + t.html()).join(' ') : m.html())); }
+function buscar(q) {
+  const w = norm(q.trim()).split(/\s+/).filter(Boolean); let n = 0;
+  document.querySelectorAll('#mods li').forEach((li, i) => {
+    const m = MODS[i], ok = !w.length || w.every(x => textoMod(m).includes(x));
+    li.hidden = !ok; if (ok) n++;
+    const ex = li.querySelector('.res-extra'); if (ex) ex.remove();
+    if (ok && w.length && m.id === 'preguntas') {
+      const hit = FAQ.filter(f => w.every(x => norm(f.p + ' ' + plano(f.r)).includes(x)));
+      if (hit.length) li.querySelector('.d').insertAdjacentHTML('afterend', '<span class="res-extra">' + hit.length + (hit.length === 1 ? ' pregunta' : ' preguntas') + ' con esa palabra</span>');
+    }
+  });
+  $('#sinres').hidden = n > 0;
+}
+function practicado(m) {
+  const html = m.tabs ? m.tabs.map(t => t.html()).join('') : m.html();
+  const fs = [...html.matchAll(/data-sim="(\w+)"/g)].map(x => x[1]);
+  return fs.length > 0 && fs.every(f => hechos[f]);
+}
+function modulo(id, tab) {
+  const k = MODS.findIndex(m => m.id === id), m = MODS[k];
+  if (!m) return inicio();
+  $('#top').classList.add('sub'); $('#tt').textContent = m.t;
+  let h = `<article class="mod"><h2>${m.t}</h2>`;
+  if (m.tabs) h += `<div class="tabs" role="tablist">${m.tabs.map((t, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-tab="${i}">${t.t}</button>`).join('')}</div><div id="tabc"></div>`;
+  else h += m.html();
+  const sig = MODS[k + 1];
+  h += sig ? `<button class="siguiente" type="button" data-sig="${sig.id}">Siguiente: ${sig.t}</button>` : `<button class="siguiente" type="button" data-sig="">Volver al inicio</button>`;
+  $('#main').innerHTML = h + '</article>';
+  if (m.tabs) {
+    const pon = i => { history.replaceState(null, '', '#' + m.id + (i ? '/' + i : '')); document.querySelectorAll('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(+b.dataset.tab === i))); $('#tabc').innerHTML = m.tabs[i].html(); montarSims(); };
+    document.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => pon(+b.dataset.tab)));
+    pon(Math.min(+tab || 0, m.tabs.length - 1));
+  } else montarSims();
+  $('.siguiente').addEventListener('click', e => { location.hash = e.currentTarget.dataset.sig; });
+  document.querySelectorAll('[data-ir]').forEach(b => b.addEventListener('click', () => { location.hash = b.dataset.ir; }));
+  window.scrollTo(0, 0);
+}
+
+/* ---------- Simulador ---------- */
+function montarSims() { document.querySelectorAll('[data-sim]').forEach(el => { if (!el.dataset.on) { el.dataset.on = 1; new Sim(el); } }); }
+class Sim {
+  constructor(el) {
+    this.el = el; this.f = el.dataset.sim; this.pasos = FLUJOS[this.f].pasos;
+    el.insertAdjacentHTML('beforeend', `<div class="phone"><div class="ph-top"><span class="av" aria-hidden="true">S</span><b>SEVIA Operaciones</b></div><div class="msgs" aria-live="polite"></div><div class="accion"></div><div class="composer"><button type="button" class="campo">Escribe un mensaje</button><button type="button" class="send" aria-label="Enviar" disabled><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l16-8-6 16-2-7z"/></svg></button></div></div><div class="tip" role="status"></div>`);
+    this.msgs = el.querySelector('.msgs'); this.acc = el.querySelector('.accion'); this.campo = el.querySelector('.campo'); this.send = el.querySelector('.send'); this.tip = el.querySelector('.tip');
+    el.querySelector('.reiniciar').addEventListener('click', () => this.reset());
+    this.campo.addEventListener('click', () => this.escribir());
+    this.send.addEventListener('click', () => this.enviarTexto());
+    this.reset();
+  }
+  reset() { this.i = 0; this.msgs.innerHTML = ''; this.mostrar(); }
+  burbuja(cls, html) { const d = document.createElement('div'); d.className = 'msg nuevo ' + cls; d.innerHTML = html; this.msgs.appendChild(d); this.msgs.scrollTop = this.msgs.scrollHeight; return d; }
+  mostrar() {
+    const s = this.pasos[this.i];
+    this.acc.innerHTML = ''; this.campo.textContent = 'Escribe un mensaje'; this.campo.classList.remove('listo'); this.send.disabled = true; this.listo = null;
+    if (!s) { this.burbuja('fin', 'Práctica terminada'); this.tipTxt('¡Muy bien! Terminaste esta práctica.', 'ok'); marcar(this.f); return; }
+    this.burbuja('bot', esc(s.b));
+    this.tipTxt(s.n || '');
+    const ultimoSinResp = s.r === undefined && !s.a;
+    if (s.o) {
+      const q = document.createElement('div'); q.className = 'quick';
+      s.o.forEach((t, k) => {
+        const [a, b] = t.split('|'); const btn = document.createElement('button'); btn.type = 'button';
+        btn.innerHTML = esc(a) + (b ? '<small>' + esc(b) + '</small>' : '');
+        if (k === s.r) btn.classList.add('pista');
+        btn.addEventListener('click', () => this.elegir(k, q));
+        q.appendChild(btn);
+      });
+      this.msgs.appendChild(q); this.msgs.scrollTop = this.msgs.scrollHeight;
+      if (ultimoSinResp) this.fin = true;
+    } else if (s.a) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'btnreal'; b.textContent = textoAccion(s.a);
+      b.addEventListener('click', () => { this.acc.innerHTML = ''; this.msgs.appendChild(Object.assign(document.createElement('div'), { className: 'msg nuevo yo' + (s.a === 'ubic' ? '' : ' foto'), innerHTML: s.a === 'ubic' ? 'Ubicación compartida (precisión ±12 m)' : '<span class="fph" aria-hidden="true"></span>' + esc(s.f || 'Foto') })); this.siguiente(); });
+      this.acc.appendChild(b);
+    } else if (typeof s.r === 'string') {
+      this.campo.textContent = 'Toca aquí para escribir ' + s.r;
+    } else {
+      setTimeout(() => this.siguiente(), 900);
+    }
+  }
+  tipTxt(t, cls) { this.tip.className = 'tip' + (cls ? ' ' + cls : ''); this.tip.textContent = t; }
+  elegir(k, q) {
+    const s = this.pasos[this.i];
+    if (s.r === undefined) { this.tipTxt('Con esto termina esta práctica. Toca «Empezar de nuevo» para repetirla.', 'ok'); marcar(this.f); return; }
+    if (k !== s.r) { this.tipTxt((s.w && s.w[k]) || 'En esta práctica toca el botón marcado.', 'warn'); return; }
+    q.remove(); this.burbuja('yo', esc(s.o[k].split('|')[0])); this.siguiente();
+  }
+  escribir() { const s = this.pasos[this.i]; if (!s || typeof s.r !== 'string' || s.o) return; this.campo.textContent = s.r; this.campo.classList.add('listo'); this.send.disabled = false; this.listo = s.r; this.send.focus(); }
+  enviarTexto() { if (!this.listo) return; this.burbuja('yo', esc(this.listo)); this.siguiente(); }
+  siguiente() { this.i++; setTimeout(() => this.mostrar(), 350); }
+}
+
+/* ---------- Rutas ---------- */
+$('#back').addEventListener('click', () => { location.hash = ''; });
+function ruta() { const [h, tab] = location.hash.slice(1).split('/'); h ? modulo(h, tab) : inicio(); }
+window.addEventListener('hashchange', ruta);
+ruta();
+</script>
+</body>
+</html>
